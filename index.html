@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
     <div class="browser">
         <!-- Barra de Ferramentas -->
         <div class="row">
@@ -27,12 +26,23 @@
             </div>
         </div>
 
+        <div class="row tabs">
+            <div class="tab">
+                <p class="text">Nova guia</p>
+                <button class="close-tab">X</button>
+            </div>
+            <div class="tab active">
+                <p class="text">Nova guia</p>
+                <button class="close-tab">X</button>
+            </div>
+        </div>
+
         <!-- Viewport do navegador -->
         <div class="container-frameTab">
             <iframe name="frameTab" class="responsive-iframe" src="./www.thereal.com"></iframe>
         </div>
     </div>
-
+    <script type="module" src="./assets/js/index.js"></script>
 </body>
 
 </html>
