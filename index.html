@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="browrser.css" />
+    <title>Mer Browser</title>
+</head>
+
+<body>
+
+    <div class="browser">
+        <!-- Barra de Ferramentas -->
+        <div class="row">
+            <div class="column left">
+                <span class="dot" style="background:#ED594A;"></span>
+            </div>
+            <div class="column middle" id="url">
+                <input type="text" id="url_text" value="www.thereal.com">
+            </div>
+            <div class="column right">
+                <div style="float:right">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Viewport do navegador -->
+        <div class="container-frameTab">
+            <iframe name="frameTab" class="responsive-iframe" src="./www.thereal.com"></iframe>
+        </div>
+    </div>
+
+</body>
+
+</html>
