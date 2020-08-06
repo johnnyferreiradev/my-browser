@@ -3,17 +3,29 @@ const browser = document.querySelector('.browser');
 
 const urlBar = browser.querySelector('#url');
 const urlField = browser.querySelector('#url_text');
+const frameContainer = browser.querySelector('.container-frameTab');
 const frameTab = browser.querySelector('.responsive-iframe');
 const closeButton = browser.querySelector('.dot');
 const addButton = browser.querySelector('#new-tab');
 const menu = browser.querySelector('#menu');
 
 // states
-
+let currentIframe = null;
 
 // functions
 const removeElement = (element) => {
     element.parentNode.removeElement(element);
+}
+
+const createIframe = (url) => {
+    const iframe = document.createElement('iframe');
+    iframe.name = 'frameTab';
+    iframe.className = 'responsive-iframe';
+    iframe.src = url;
+    iframe.id = 'frame-content';
+
+    currentIframe = iframe;
+    frameContainer.append(currentIframe);
 }
 
 const hideToolbar = () => {
@@ -31,24 +43,17 @@ const showToolbar = () => {
 const closeWindow = () => {
     addButton.style.display = 'inline-block';
     hideToolbar();
+    currentIframe = null;
 }
 
 const newWindow = () => {
     addButton.style.display = 'none';
     showToolbar();
-}
-
-const createIframe = (url) => {
-    const iframe = document.createElement('iframe');
-    iframe.name = 'frameTab';
-    iframe.className = 'responsive-iframe';
-    iframe.src = url;
-
-    return iframe;
+    createIframe('./empty-window');
 }
 
 const fetchUrl = (url) => {
-    frameTab.src = url;
+    currentIframe.src = url;
 }
 
 const search = (e) => {
