@@ -7,14 +7,14 @@ const frameContainer = browser.querySelector('.container-frameTab');
 const frameTab = browser.querySelector('.responsive-iframe');
 const closeButton = browser.querySelector('.dot');
 const addButton = browser.querySelector('#new-tab');
+const searchButton = browser.querySelector('.search-button');
 const menu = browser.querySelector('#menu');
 
 // states
-let currentIframe = null;
 
 // functions
 const removeElement = (element) => {
-    element.parentNode.removeElement(element);
+    element.parentNode.removeChild(element);
 }
 
 const createIframe = (url) => {
@@ -24,9 +24,10 @@ const createIframe = (url) => {
     iframe.src = url;
     iframe.id = 'frame-content';
 
-    currentIframe = iframe;
-    frameContainer.append(currentIframe);
+    frameContainer.append(iframe);
 }
+
+const getIframe = () => browser.querySelector('#frame-content');
 
 const hideToolbar = () => {
     urlBar.style.display = 'none';
@@ -35,7 +36,7 @@ const hideToolbar = () => {
 }
 
 const showToolbar = () => {
-    urlBar.style.display = 'block';
+    urlBar.style.display = 'flex';
     closeButton.style.display = 'inline-block';
     menu.style.display = 'block';
 }
@@ -43,29 +44,33 @@ const showToolbar = () => {
 const closeWindow = () => {
     addButton.style.display = 'inline-block';
     hideToolbar();
-    currentIframe = null;
+    const currentIframe = getIframe();
+    removeElement(currentIframe);
+    urlField.value = '';
 }
 
 const newWindow = () => {
     addButton.style.display = 'none';
     showToolbar();
     createIframe('./empty-window');
+    urlField.focus();
 }
 
 const fetchUrl = (url) => {
+    const currentIframe = getIframe();
     currentIframe.src = url;
 }
 
 const search = (e) => {
-    const urlField = e.target;
     const key = e.which || e.keyCode;
 
-    if (key === 13) {
+    if (key === 13 || key === 1) {
         fetchUrl(urlField.value);
     }
 }
 
 // event assignment
 urlField.addEventListener('keyup', search);
+searchButton.addEventListener('click', search);
 closeButton.addEventListener('click', closeWindow);
 addButton.addEventListener('click', newWindow);
