@@ -97,13 +97,41 @@ body {
 
 .dot {
     margin-top: 4px;
-    height: 14px;
-    width: 14px;
+    height: 18px;
+    width: 18px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
+    text-align: center;
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ED594A;
+    margin-right: 8px;
 }
 
+.dot:hover {
+    color: #f3e4e2;
+    cursor: pointer;
+}
+
+.new-tab {
+    margin-top: 4px;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 22px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+}
+
+.new-tab:hover {
+    background-color: #D7DEE4;
+}
 
 /* Style the input field */
 
@@ -158,6 +186,9 @@ input[type=text] {
     overflow: hidden;
     width: 100%;
     padding-top: 56.25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
 
