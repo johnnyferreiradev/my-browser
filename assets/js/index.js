@@ -9,6 +9,7 @@ const closeButton = browser.querySelector('.dot');
 const addButton = browser.querySelector('#new-tab');
 const searchButton = browser.querySelector('.search-button');
 const menu = browser.querySelector('#menu');
+const detailsField = browser.querySelector('#page-details');
 
 // states
 

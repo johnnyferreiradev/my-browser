@@ -33,6 +33,7 @@ body {
 
 .column {
     float: left;
+    position: relative;
 }
 
 .left {
@@ -195,7 +196,25 @@ input[type=text] {
 
 #menu {
     display: none;
+    cursor: pointer;
 }
+
+#page-details {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    padding: 8px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 2px #0002;
+    z-index: 1;
+}
+
+#menu:hover #page-details {
+    display: block;
+}
+
 /* Three bars (hamburger menu) */
 
 .bar {
