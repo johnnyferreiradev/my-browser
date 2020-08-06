@@ -152,8 +152,7 @@ input[type=text] {
     align-items: center;
 }
 
-#url:before,
-#url:after {
+#url:before {
     content: ' ';
     margin-top: -8px;
     height: 24px;

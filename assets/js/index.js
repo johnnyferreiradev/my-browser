@@ -57,9 +57,23 @@ const newWindow = () => {
     urlField.focus();
 }
 
+const loadWindowData = (iframeWindow) => {
+    console.log('>> ', iframeWindow);
+
+    const pageUrl = iframeWindow.location.href;
+    const protocol = iframeWindow.location.protocol;
+    const port = iframeWindow.location.port;
+    const screenHeight = iframeWindow.screen.availHeight;
+    const screenWidth = iframeWindow.screen.availWidth;
+    const OS = iframeWindow.navigator.appVersion;
+
+    console.log(pageUrl, protocol, port, screenHeight, screenWidth, OS);
+}
+
 const fetchUrl = (url) => {
     const currentIframe = getIframe();
-    currentIframe.src = url;
+    const iframeWindow = window.open(url, currentIframe.name);
+    loadWindowData(iframeWindow);
 }
 
 const search = (e) => {
