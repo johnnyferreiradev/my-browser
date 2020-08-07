@@ -57,9 +57,13 @@ const newWindow = () => {
     urlField.focus();
 }
 
-const loadWindowData = (iframeWindow) => {
-    console.log('>> ', iframeWindow);
+const createDetailItem = (value) => {
+    const p = document.createElement('p');
+    p.innerHTML = value;
+    return p;
+}
 
+const loadWindowData = (iframeWindow) => {
     const pageUrl = iframeWindow.location.href;
     const protocol = iframeWindow.location.protocol;
     const port = iframeWindow.location.port;
@@ -67,13 +71,31 @@ const loadWindowData = (iframeWindow) => {
     const screenWidth = iframeWindow.screen.availWidth;
     const OS = iframeWindow.navigator.appVersion;
 
-    console.log(pageUrl, protocol, port, screenHeight, screenWidth, OS);
+    const pageUrlP = createDetailItem(pageUrl);
+    const protocolP = createDetailItem(protocol);
+    const portP = createDetailItem(port);
+    const screenHeightP = createDetailItem(screenHeight);
+    const screenWidthP = createDetailItem(screenWidth);
+    const OSP = createDetailItem(OS);
+
+    const div = document.createElement('div');
+    div.append(pageUrlP);
+    div.append(protocolP);
+    div.append(portP);
+    div.append(screenHeightP);
+    div.append(screenWidthP);
+    div.append(OSP);
+
+    div.id = 'details';
+
+    return div;
 }
 
 const fetchUrl = (url) => {
     const currentIframe = getIframe();
     const iframeWindow = window.open(url, currentIframe.name);
-    loadWindowData(iframeWindow);
+    const windowData = loadWindowData(iframeWindow);
+    detailsField.append(windowData);
 }
 
 const search = (e) => {
