@@ -11,8 +11,6 @@ const searchButton = browser.querySelector('.search-button');
 const menu = browser.querySelector('#menu');
 const detailsField = browser.querySelector('#page-details');
 
-// states
-
 // functions
 const removeElement = (element) => {
     element.parentNode.removeChild(element);
@@ -29,6 +27,7 @@ const createIframe = (url) => {
 }
 
 const getIframe = () => browser.querySelector('#frame-content');
+const getDetails = () => browser.querySelector('#details');
 
 const hideToolbar = () => {
     urlBar.style.display = 'none';
@@ -39,14 +38,16 @@ const hideToolbar = () => {
 const showToolbar = () => {
     urlBar.style.display = 'flex';
     closeButton.style.display = 'inline-block';
-    menu.style.display = 'block';
 }
 
 const closeWindow = () => {
     addButton.style.display = 'inline-block';
     hideToolbar();
     const currentIframe = getIframe();
+    const detais = getDetails();
+
     removeElement(currentIframe);
+    removeElement(detais);
     urlField.value = '';
 }
 
@@ -63,20 +64,13 @@ const createDetailItem = (value) => {
     return p;
 }
 
-const loadWindowData = (iframeWindow) => {
-    const pageUrl = iframeWindow.location.href;
-    const protocol = iframeWindow.location.protocol;
-    const port = iframeWindow.location.port;
-    const screenHeight = iframeWindow.screen.availHeight;
-    const screenWidth = iframeWindow.screen.availWidth;
-    const OS = iframeWindow.navigator.appVersion;
-
-    const pageUrlP = createDetailItem(pageUrl);
-    const protocolP = createDetailItem(protocol);
-    const portP = createDetailItem(port);
-    const screenHeightP = createDetailItem(screenHeight);
-    const screenWidthP = createDetailItem(screenWidth);
-    const OSP = createDetailItem(OS);
+const createDetailContent = (data) => {
+    const pageUrlP = createDetailItem(data.pageUrl);
+    const protocolP = createDetailItem(data.protocol);
+    const portP = createDetailItem(data.port);
+    const screenHeightP = createDetailItem(data.screenHeight);
+    const screenWidthP = createDetailItem(data.screenWidth);
+    const OSP = createDetailItem(data.OS);
 
     const div = document.createElement('div');
     div.append(pageUrlP);
@@ -91,11 +85,30 @@ const loadWindowData = (iframeWindow) => {
     return div;
 }
 
+const loadWindowData = (iframeWindow) => {
+    const pageUrl = iframeWindow.location.href;
+    const protocol = iframeWindow.location.protocol;
+    const port = iframeWindow.location.port;
+    const screenHeight = iframeWindow.screen.availHeight;
+    const screenWidth = iframeWindow.screen.availWidth;
+    const OS = iframeWindow.navigator.appVersion;
+
+    const content = createDetailContent({
+        pageUrl,
+        protocol,
+        port,
+        screenHeight,
+        screenWidth,
+        OS,
+    });
+    detailsField.append(content);
+}
+
 const fetchUrl = (url) => {
     const currentIframe = getIframe();
     const iframeWindow = window.open(url, currentIframe.name);
-    const windowData = loadWindowData(iframeWindow);
-    detailsField.append(windowData);
+    menu.style.display = 'block';
+    loadWindowData(iframeWindow);
 }
 
 const search = (e) => {
