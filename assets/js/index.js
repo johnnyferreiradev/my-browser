@@ -61,19 +61,19 @@ const newWindow = () => {
     urlField.focus();
 }
 
-const createDetailItem = (value) => {
+const createInfoItem = (value) => {
     const p = document.createElement('p');
     p.innerHTML = value;
     return p;
 }
 
 const createDetailContent = (data) => {
-    const pageUrlP = createDetailItem(data.pageUrl);
-    const protocolP = createDetailItem(data.protocol);
-    const portP = createDetailItem(data.port);
-    const screenHeightP = createDetailItem(data.screenHeight);
-    const screenWidthP = createDetailItem(data.screenWidth);
-    const OSP = createDetailItem(data.OS);
+    const pageUrlP = createInfoItem(data.pageUrl);
+    const protocolP = createInfoItem(data.protocol);
+    const portP = createInfoItem(data.port);
+    const screenHeightP = createInfoItem(data.screenHeight);
+    const screenWidthP = createInfoItem(data.screenWidth);
+    const OSP = createInfoItem(data.OS);
 
     const div = document.createElement('div');
     div.append(pageUrlP);
@@ -88,7 +88,7 @@ const createDetailContent = (data) => {
     return div;
 }
 
-const loadWindowData = (iframeWindow) => {
+const loadIframeData = (iframeWindow) => {
     const pageUrl = iframeWindow.location.href;
     const protocol = iframeWindow.location.protocol;
     const port = iframeWindow.location.port;
@@ -111,7 +111,7 @@ const fetchUrl = (url) => {
     const currentIframe = getIframe();
     const iframeWindow = window.open(url, currentIframe.name);
     menu.style.display = 'block';
-    loadWindowData(iframeWindow);
+    loadIframeData(iframeWindow);
 }
 
 const search = (e) => {
