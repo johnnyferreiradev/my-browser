@@ -1,3 +1,6 @@
+// OBS: Só consegui rodar usando um servidor local. Caso contrário, o chrome bloqueava o
+// acesso ao window do iframe. Usei o live server como localhost.
+
 // elements
 const browser = document.querySelector('.browser');
 
